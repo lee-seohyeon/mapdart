@@ -54,13 +54,6 @@ export const ResultCard: React.FC<ResultCardProps> = ({ result, onReset }) => {
         {/* 카드 그림자 효과 */}
         <div className="absolute -inset-1 bg-gradient-to-br from-amber-400 via-orange-400 to-pink-500 rounded-3xl blur opacity-25 -z-10" />
       </div>
-
-      {/* 하단 슬라이더 인디케이터 */}
-      <div className="flex justify-center mt-6 gap-2">
-        <div className="w-8 h-1 bg-gray-800 rounded-full" />
-        <div className="w-1 h-1 bg-gray-300 rounded-full" />
-        <div className="w-1 h-1 bg-gray-300 rounded-full" />
-      </div>
     </div>
   );
 }; 

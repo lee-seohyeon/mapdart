@@ -4,92 +4,172 @@ import React, { useState, useEffect } from 'react';
 import { KoreaMap } from './KoreaMap';
 import { DartButton } from './DartButton';
 import { ResultCard } from './ResultCard';
-import { useDart } from '@/hooks/useDart';
+import { City, DartResult } from '@/types';
+import { getRandomCity } from '@/data/cities';
 
 export const MapDart: React.FC = () => {
-  const { dartState, throwDart, resetDart } = useDart();
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isThrown, setIsThrown] = useState(false);
+  const [result, setResult] = useState<DartResult | null>(null);
   const [dartPosition, setDartPosition] = useState<{ x: number; y: number } | null>(null);
 
   // 다트 애니메이션 시작 시 랜덤 위치 생성
   useEffect(() => {
-    if (dartState.isAnimating) {
-      const randomX = Math.random() * 300 + 50; // 50-350 범위
-      const randomY = Math.random() * 350 + 100; // 100-450 범위
+    if (isAnimating) {
+      const randomX = Math.random() * 300 + 50;
+      const randomY = Math.random() * 200 + 100;
       setDartPosition({ x: randomX, y: randomY });
-    } else if (!dartState.isThrown) {
+    } else if (!isThrown) {
       setDartPosition(null);
     }
-  }, [dartState.isAnimating, dartState.isThrown]);
+  }, [isAnimating, isThrown]);
+
+  const handleThrowDart = () => {
+    console.log('다트 던지기 버튼 클릭됨!');
+    
+    if (isAnimating) {
+      console.log('이미 애니메이션 중입니다.');
+      return;
+    }
+
+    console.log('다트 던지기 시작');
+    
+    // 애니메이션 시작
+    setIsAnimating(true);
+    setIsThrown(false);
+    setResult(null);
+
+    // 랜덤 도시 선택
+    const selectedCity = getRandomCity();
+    console.log('선택된 도시:', selectedCity.name);
+
+    // 3초 후 결과 표시
+    setTimeout(() => {
+      console.log('애니메이션 완료, 결과 표시');
+      
+      const dartResult: DartResult = {
+        city: selectedCity,
+        throwDate: new Date(),
+        id: `dart-${Date.now()}`,
+      };
+
+      setIsAnimating(false);
+      setIsThrown(true);
+      setResult(dartResult);
+    }, 3000);
+  };
+
+  const handleReset = () => {
+    console.log('다트 리셋');
+    setIsAnimating(false);
+    setIsThrown(false);
+    setResult(null);
+    setDartPosition(null);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex flex-col">
-      {/* 헤더 */}
-      <header className="px-6 py-4 flex justify-between items-center">
-        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-          <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-          <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-          </svg>
-        </button>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex flex-col items-center justify-center p-4">
+      {/* 배경 효과 */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-40 left-20 w-80 h-80 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
+      </div>
 
-      {/* 메인 컨텐츠 */}
-      <main className="flex-1 px-6 pb-8">
-        {dartState.result ? (
-          /* 결과 화면 */
-          <div className="flex flex-col items-center justify-center h-full">
-            <ResultCard result={dartState.result} onReset={resetDart} />
-          </div>
-        ) : (
-          /* 지도 및 다트 던지기 화면 */
-          <div className="flex flex-col items-center justify-center h-full space-y-8">
-            {/* 타이틀 */}
-            <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold text-gray-800 mb-2">맵다트</h1>
+      <div className="relative z-10 w-full max-w-md mx-auto space-y-8">
+        {/* 결과가 없을 때만 헤더와 지도, 버튼 표시 */}
+        {!result && (
+          <>
+            {/* 헤더 */}
+            <div className="text-center space-y-2">
+              <h1 className="text-4xl font-bold text-gray-800 mb-2">
+                🎯 맵다트
+              </h1>
               <p className="text-gray-600 text-lg">
-                {dartState.isAnimating 
-                  ? '다트가 날아가고 있어요...' 
-                  : '오늘 어디로 떠나볼까요?'
-                }
+                다트를 던져서 오늘의 여행지를 정해보세요!
               </p>
+              {isAnimating && (
+                <div className="flex items-center justify-center space-x-2 mt-4">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <span className="text-gray-700 ml-2">다트가 날아가는 중...</span>
+                </div>
+              )}
             </div>
 
             {/* 지도 */}
             <div className="relative mb-8">
               <KoreaMap
-                selectedCity={dartState.result ? dartState.result.city : null}
+                selectedCity={null}
                 dartPosition={dartPosition}
-                showDart={dartState.isAnimating}
+                showDart={isAnimating}
               />
-              
-              {/* 다트 애니메이션 효과 */}
-              {dartState.isAnimating && (
-                <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute top-4 left-4 w-2 h-2 bg-orange-400 rounded-full animate-ping" />
-                  <div className="absolute top-8 right-8 w-3 h-3 bg-pink-400 rounded-full animate-pulse" />
-                  <div className="absolute bottom-12 left-12 w-2 h-2 bg-yellow-400 rounded-full animate-bounce" />
-                </div>
-              )}
             </div>
 
             {/* 다트 던지기 버튼 */}
-            <DartButton
-              onThrow={throwDart}
-              isAnimating={dartState.isAnimating}
-              isThrown={dartState.isThrown}
-            />
-
-            {/* 설명 텍스트 */}
-            <div className="text-center text-sm text-gray-500 max-w-xs">
-              <p>버튼을 눌러 대한민국 어디든 랜덤으로 여행지를 정해보세요!</p>
+            <div className="flex justify-center mb-8">
+              <DartButton
+                onThrow={handleThrowDart}
+                isAnimating={isAnimating}
+                isThrown={isThrown}
+              />
             </div>
+          </>
+        )}
+
+        {/* 결과 표시 - 결과가 있을 때만 표시 (헤더 없음) */}
+        {result && (
+          <div className="animate-fadeIn">
+            <ResultCard result={result} onReset={handleReset} />
           </div>
         )}
-      </main>
+      </div>
+
+      {/* 커스텀 애니메이션 */}
+      <style jsx>{`
+        @keyframes blob {
+          0% {
+            transform: translate(0px, 0px) scale(1);
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+          }
+          100% {
+            transform: translate(0px, 0px) scale(1);
+          }
+        }
+
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out;
+        }
+      `}</style>
     </div>
   );
 }; 

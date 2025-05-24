@@ -19,9 +19,14 @@ export const DartButton: React.FC<DartButtonProps> = ({
     return '다트 던지기!';
   };
 
+  const handleClick = () => {
+    console.log('DartButton: 버튼 클릭됨');
+    onThrow();
+  };
+
   return (
     <button
-      onClick={onThrow}
+      onClick={handleClick}
       disabled={isAnimating}
       className={`
         relative px-8 py-4 rounded-2xl font-bold text-white text-lg
@@ -34,9 +39,6 @@ export const DartButton: React.FC<DartButtonProps> = ({
         focus:outline-none focus:ring-4 focus:ring-orange-300
       `}
     >
-      {/* 버튼 효과 */}
-      <div className="absolute inset-0 rounded-2xl bg-white opacity-20 transform scale-95 transition-transform duration-300 group-hover:scale-100" />
-      
       {/* 버튼 텍스트 */}
       <span className="relative z-10 flex items-center justify-center gap-2">
         {isAnimating && (
