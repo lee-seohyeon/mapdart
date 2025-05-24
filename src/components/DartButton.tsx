@@ -16,7 +16,7 @@ export const DartButton: React.FC<DartButtonProps> = ({
   const getButtonText = (): string => {
     if (isAnimating) return '다트 던지는 중...';
     if (isThrown) return '다시 던지기';
-    return '다트 던지기!';
+    return '다트 던지기';
   };
 
   const handleClick = () => {
@@ -29,7 +29,7 @@ export const DartButton: React.FC<DartButtonProps> = ({
       onClick={handleClick}
       disabled={isAnimating}
       className={`
-        relative px-8 py-4 rounded-2xl font-bold text-white text-lg
+        relative px-12 py-4 rounded-2xl font-bold text-white text-lg
         transform transition-all duration-300 ease-out
         ${isAnimating
           ? 'bg-gray-400 cursor-not-allowed scale-95'
@@ -45,7 +45,6 @@ export const DartButton: React.FC<DartButtonProps> = ({
           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
         )}
         {getButtonText()}
-        {!isAnimating && <span className="text-xl">🎯</span>}
       </span>
     </button>
   );
