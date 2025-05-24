@@ -5,7 +5,7 @@ import { KoreaMap } from './KoreaMap';
 import { DartButton } from './DartButton';
 import { DartAnimation } from './DartAnimation';
 import { ResultCard } from './ResultCard';
-import { City, DartResult } from '@/types';
+import { DartResult } from '@/types';
 import { getRandomCity } from '@/data/cities';
 
 export const MapDart: React.FC = () => {
