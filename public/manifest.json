@@ -1,0 +1,23 @@
+{
+  "name": "MAPDART 맵다트",
+  "short_name": "MAPDART",
+  "description": "다트를 던져서 오늘의 여행지를 정해보세요!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ec4899",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/images/mainmap3.png",
+      "sizes": "640x640",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+} 
