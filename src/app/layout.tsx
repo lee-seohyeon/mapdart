@@ -23,7 +23,10 @@ export const metadata: Metadata = {
   
   // 파비콘 설정
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/images/mainmap3.png", type: "image/png" }
+    ],
+    apple: { url: "/images/mainmap3.png", type: "image/png" }
   },
 
   // Open Graph (카카오톡, 페이스북 등)
@@ -88,8 +91,6 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        <link rel="icon" type="image/png" href="/images/mainmap3.png" />
-        <link rel="apple-touch-icon" href="/images/mainmap3.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ec4899" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
