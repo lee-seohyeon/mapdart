@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { GoogleTagManagerScript, GoogleTagManagerNoScript } from '@/components/GoogleTagManager'
+import Script from 'next/script'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -91,6 +92,13 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <Script 
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          strategy="afterInteractive"
+          data-client="ca-pub-3539009473858770"
+          crossOrigin="anonymous"
+        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ec4899" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
