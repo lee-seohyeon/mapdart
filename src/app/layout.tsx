@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { GoogleTagManagerScript, GoogleTagManagerNoScript } from '@/components/GoogleTagManager'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -96,10 +97,12 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="MAPDART" />
+        <GoogleTagManagerScript />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <GoogleTagManagerNoScript />
         {children}
       </body>
     </html>
