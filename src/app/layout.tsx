@@ -22,12 +22,8 @@ export const metadata: Metadata = {
   creator: "MAPDART",
   publisher: "MAPDART",
   
-  // 파비콘 설정
   icons: {
-    icon: [
-      { url: "/images/mainmap3.png", type: "image/png" }
-    ],
-    apple: { url: "/images/mainmap3.png", type: "image/png" }
+    icon: { url: "/images/mainmap3.png", type: "image/png" },
   },
 
   // Open Graph (카카오톡, 페이스북 등)
