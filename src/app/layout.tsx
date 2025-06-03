@@ -23,11 +23,7 @@ export const metadata: Metadata = {
   
   // 파비콘 설정
   icons: {
-    icon: [
-      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
-      { url: "/images/mainmap3.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: { url: "/images/mainmap3.png", sizes: "180x180", type: "image/png" },
+    icon: "/favicon.ico",
   },
 
   // Open Graph (카카오톡, 페이스북 등)
