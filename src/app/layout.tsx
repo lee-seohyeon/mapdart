@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mapdart.vercel.app'),
   title: {
     default: "MAPDART 맵다트 - 다트로 정하는 여행지",
     template: "%s | MAPDART 맵다트"
@@ -76,18 +77,19 @@ export const metadata: Metadata = {
     },
   },
 
-  // 모바일 최적화
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
+
 
   // 카카오톡 등 한국 SNS를 위한 추가 설정
   other: {
     "kakao:card": "summary_large_image",
     "naver:card": "summary_large_image",
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

@@ -6,10 +6,10 @@ const nextConfig: NextConfig = {
   // SEO 최적화
   compress: true,
   
-  // 성능 최적화
-  experimental: {
-    optimizeCss: true,
-  },
+  // 성능 최적화 (optimizeCss는 주석 처리 - critters 의존성 문제로 인해)
+  // experimental: {
+  //   optimizeCss: true,
+  // },
   
   // 이미지 최적화
   images: {
