@@ -27,7 +27,13 @@ export const metadata: Metadata = {
   publisher: "MAPDART",
   
   icons: {
-    icon: { url: "/images/mainmap3.png", type: "image/png" },
+    icon: [
+      { url: "/images/mainmap3.png", type: "image/png", sizes: "640x640" },
+      { url: "/images/mainmap3.png", type: "image/png", sizes: "32x32" },
+      { url: "/images/mainmap3.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: { url: "/images/mainmap3.png", type: "image/png", sizes: "180x180" },
+    shortcut: { url: "/images/mainmap3.png", type: "image/png" },
   },
 
   // Open Graph (카카오톡, 페이스북 등)

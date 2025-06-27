@@ -11,7 +11,20 @@
     {
       "src": "/images/mainmap3.png",
       "type": "image/png",
-      "sizes": "640x640"
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/mainmap3.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/mainmap3.png",
+      "type": "image/png",
+      "sizes": "640x640",
+      "purpose": "any maskable"
     }
   ]
 } 
