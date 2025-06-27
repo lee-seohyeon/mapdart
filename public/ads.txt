@@ -1,0 +1,5 @@
+# ads.txt file for Google AdSense
+# This file is used to declare authorized digital sellers for the website
+# https://mapdart.vercel.app/ads.txt
+
+google.com, pub-3539009473858770, DIRECT, f08c47fec0942fa0 
