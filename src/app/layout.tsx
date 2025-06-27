@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { GoogleTagManagerScript, GoogleTagManagerNoScript } from '@/components/GoogleTagManager'
+import { StructuredData } from '@/components/StructuredData'
 import Script from 'next/script'
 
 const geistSans = Geist({
@@ -15,9 +16,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MAPDART 맵다트",
+  title: {
+    default: "MAPDART 맵다트 - 다트로 정하는 여행지",
+    template: "%s | MAPDART 맵다트"
+  },
   description: "다트를 던져서 오늘의 여행지를 정해보세요! 대한민국 전국 20,273개 지역 중 랜덤으로 추천해드립니다.",
-  keywords: ["여행", "맵다트", "MAPDART", "다트", "랜덤 여행지", "국내여행", "여행 추천"],
+  keywords: ["여행", "맵다트", "MAPDART", "다트", "랜덤 여행지", "국내여행", "여행 추천", "한국 여행", "국내 관광지", "여행 게임"],
   authors: [{ name: "MAPDART" }],
   creator: "MAPDART",
   publisher: "MAPDART",
@@ -101,6 +105,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="MAPDART" />
         <GoogleTagManagerScript />
+        <StructuredData />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

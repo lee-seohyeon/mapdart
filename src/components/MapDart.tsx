@@ -89,7 +89,7 @@ export const MapDart: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-pink-50 to-orange-50 flex flex-col items-center justify-center p-4">
+    <main className="min-h-screen bg-gradient-to-br from-white via-pink-50 to-orange-50 flex flex-col items-center justify-center p-4">
       {/* 배경 효과 */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-80 h-80 bg-pink-100 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
@@ -108,7 +108,7 @@ export const MapDart: React.FC = () => {
         {!result && (
           <>
             {/* 헤더 */}
-            <div className="text-center space-y-2">
+            <header className="text-center space-y-2">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-500 via-orange-500 to-pink-600 bg-clip-text text-transparent mb-2">
                 MAPDART
               </h1>
@@ -123,33 +123,33 @@ export const MapDart: React.FC = () => {
                   <span className="text-gray-700 ml-2">다트가 날아가는 중...</span>
                 </div>
               )}
-            </div>
+            </header>
 
             {/* 지도 */}
-            <div className="relative mb-8">
+            <section className="relative mb-8" aria-label="한국 지도 다트판">
               <KoreaMap
                 selectedCity={null}
                 dartPosition={null}
                 showDart={false}
               />
-            </div>
+            </section>
 
             {/* 다트 던지기 버튼 */}
-            <div className="flex justify-center mb-8">
+            <section className="flex justify-center mb-8" aria-label="다트 던지기 액션">
               <DartButton
                 onThrow={handleThrowDart}
                 isAnimating={isAnimating}
                 isThrown={false}
               />
-            </div>
+            </section>
           </>
         )}
 
         {/* 결과 표시 - 결과가 있을 때만 표시 (헤더 없음) */}
         {result && (
-          <div className="animate-fadeIn">
+          <section className="animate-fadeIn" aria-label="여행지 결과">
             <ResultCard result={result} onReset={handleReset} />
-          </div>
+          </section>
         )}
       </div>
 
@@ -197,6 +197,6 @@ export const MapDart: React.FC = () => {
           animation: fadeIn 0.5s ease-out;
         }
       `}</style>
-    </div>
+    </main>
   );
 }; 
